@@ -53,6 +53,7 @@ clean_grape_num_vector <- function(input){
 #########
 # merge to get column of only districts
 uni$Variety <- str_trim(uni$Variety)
+uni$Variety <- gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "", uni$Variety, perl=TRUE)
 
 g.crush <- left_join(uni, dist_key, by = c("Variety" = "key"))
 
@@ -76,8 +77,6 @@ clean.g.crush <- inner_join(full.g.crush, grape.dict, by = "Variety")
 gc <- clean.g.crush %>%
 filter(Base.Price.Per.Ton > 0) %>%
 	arrange(Year)
-
-View(gc)
 
 # save for later
 write.csv(gc, 

@@ -13,8 +13,9 @@ gc$Brix.Code <- as.numeric(gc$Brix.Code)
 gc$Tons <- as.numeric(gc$Tons)
 gc$Year <- as.integer(gc$Year)
 
+
 gc %>%
-	group_by(Year) %>%
+	group_by(Year, District) %>%
 	summarize(n = n())
 
 unique(gc$Variety)
