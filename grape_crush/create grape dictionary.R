@@ -1,4 +1,8 @@
-g.names <- read.csv("/home/dan/Data/NASS/Grape Crush/gc_csv/grape_names.csv")
+
+library(stringr)
+library(tidyverse)
+
+g.names <- read.csv("/home/dan/Data/NASS/Grape_Crush/gc_csv/grape_names.csv")
 str(g.names)
 
 # TRASH BELOW
@@ -20,7 +24,7 @@ grape_dict <- as.data.frame(grape_dict)
 names(grape_dict) <- names(g.names)
 
 write.csv(grape_dict, 
-	file = "/home/dan/Data/NASS/Grape Crush/gc_csv/grape_dict.csv",
+	file = "/home/dan/Data/NASS/Grape_Crush/gc_csv/grape_dict.csv",
 	row.names=FALSE)
 
 

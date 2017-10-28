@@ -52,6 +52,7 @@ clean_grape_num_vector <- function(input){
 # clean #
 #########
 # merge to get column of only districts
+uni$Variety <- gsub("b/", "", uni$Variety)
 uni$Variety <- str_trim(uni$Variety)
 uni$Variety <- gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "", uni$Variety, perl=TRUE)
 
@@ -82,3 +83,6 @@ filter(Base.Price.Per.Ton > 0) %>%
 write.csv(gc, 
 	file = "/home/dan/Data/NASS/Grape_Crush/gc_csv/all_gc_clean.csv",
 	row.names=FALSE)
+
+
+table((unique(grape.dict$Variety) == "other table"))["TRUE"]
