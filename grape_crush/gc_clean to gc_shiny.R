@@ -16,6 +16,15 @@ gc_shiny <- gc %>%
   rbind(temp) %>%
   arrange(Variety, Year)
 
+all_wine <- gc %>%
+  filter(Type == "white" | Type == "red") %>%
+  mutate(Type = "all wine",
+         Variety = "all wine")
+
+gc_shiny <- gc %>%
+  rbind(temp) %>%
+  rbind(all_wine) %>%
+  arrange(Variety, Year)
+
 write.csv(gc_shiny, "/home/dan/Data/NASS/Grape_Crush/gc_csv/gc_shiny.csv",
           row.names = FALSE)
-
