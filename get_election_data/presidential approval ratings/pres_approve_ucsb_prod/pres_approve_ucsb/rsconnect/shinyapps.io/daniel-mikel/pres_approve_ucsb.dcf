@@ -1,0 +1,12 @@
+name: pres_approve_ucsb
+title: pres_approve_ucsb
+username:
+account: daniel-mikel
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 249499
+bundleId: 1138895
+url: https://daniel-mikel.shinyapps.io/pres_approve_ucsb/
+when: 1513481187.46961
+asMultiple: FALSE
+asStatic: FALSE

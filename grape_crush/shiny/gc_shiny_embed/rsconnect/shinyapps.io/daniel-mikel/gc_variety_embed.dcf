@@ -1,0 +1,12 @@
+name: gc_variety_embed
+title: gc_variety_embed
+username:
+account: daniel-mikel
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 239283
+bundleId: 1093200
+url: https://daniel-mikel.shinyapps.io/gc_variety_embed/
+when: 1511477871.67315
+asMultiple: FALSE
+asStatic: FALSE
