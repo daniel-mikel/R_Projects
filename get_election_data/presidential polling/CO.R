@@ -177,7 +177,7 @@ write.csv(co_rep4_2008,
 
 
 
-# 2004 
+# 2006
 
 # gov
 url <- "https://www.realclearpolitics.com/epolls/2006/governor/co/colorado_governor_race-59.html"

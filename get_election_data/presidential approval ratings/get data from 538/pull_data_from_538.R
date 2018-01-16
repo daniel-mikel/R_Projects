@@ -5,6 +5,9 @@ library("zoo")
 
 potus45_approval <- fread("https://projects.fivethirtyeight.com/trump-approval-data/approval_polllist.csv")
 
+write.csv(potus45_approval, 
+          "/home/dan/Data/election/approval_ratings/from_538_potus45_approval_polls.csv")
+
 str(potus45_approval)
 
 tidy45 <- potus45_approval %>%

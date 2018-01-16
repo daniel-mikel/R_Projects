@@ -308,10 +308,10 @@ write.csv(fl_ge_2004,
 url <- "https://www.realclearpolitics.com/Presidential_04/fl_polls.html"
 path <- "br+ table tr~ tr+ tr div"
 
-fl_ge_2004 <- clean_rcp(url, path, 7)
-names(fl_ge_2004) <- c("Poll | Date", "Sample", "MoE", "R", "D", "I", "Spread")
-fl_ge_2004[1,] <- ""
+fl_sen_2004 <- clean_rcp(url, path, 7)
+names(fl_sen_2004) <- c("Poll | Date", "Sample", "MoE", "R", "D", "I", "Spread")
+fl_sen_2004[1,] <- ""
 
-write.csv(fl_ge_2004, 
-	"/home/dan/Data/election/US national elections/fl_ge_2004.csv",
+write.csv(fl_sen_2004, 
+	"/home/dan/Data/election/US national elections/fl_sen_2004.csv",
 	 row.names = FALSE)
