@@ -1,8 +1,23 @@
-# libraries -----------------------------------------------------------------------------------------------------------
+# Instructions:
+	# run the entirety of the script to scrape data from the NPS website
+	# afterword you can run the code chuncks under the last two comments to check:
+		# how many sites are unavailable for open campgrounds
+		# how many sites are available for open campgrounds
+	# as new campgrounds open, I will add currently closed campgrounds
+		# this will depend on how fast the snowmelt is this year
+	# typically, the week before the reservations, several campsites open as cancellations come in
 
+
+
+# libraries -----------------------------------------------------------------------------------------------------------
 
 library("rvest")
 library("tidyverse")
+
+
+
+# set up for the loop -------------------------------------------------------------------------------------------------
+
 all_sites <- as.data.frame(NULL)
 numbers <- "0"
 
@@ -12,9 +27,11 @@ url <- c("https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractC
 		 "https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70927&calarvdate=06/26/2018&sitepage=true&startIdx=")
 camp_dict <- as.data.frame(cbind(camp, url))
 
-
-
 num_site <- as.vector(NULL)
+
+
+
+# loop scrape data needed to scrape the actual campsite data ----------------------------------------------------------
 
 for(n in (1:nrow(camp_dict))){
 	not_url <- camp_dict[n,2]
@@ -31,19 +48,22 @@ for(n in (1:nrow(camp_dict))){
 
 big_camp_dict <- cbind(camp_dict, num_site)
 
+
+
+# the loop that scrapes the actual data -------------------------------------------------------------------------------
 for(c in (1:nrow(big_camp_dict))){
 	print(big_camp_dict[c,1])
 	numbers <- "0"
 
 	for (i in (1:(floor(as.numeric(big_camp_dict[c,3])/25)+1))){
-		# website ---------------------------------------------------------------------------------------------------------	
+		# website 
 		not_url <- camp_dict[c,2]
 		url <- paste0(not_url, numbers)
 		webpage <- read_html(url)
 
 		print(numbers)
 	
-		# availability ----------------------------------------------------------------------------------------------------
+		# availability 
 		path <- "td.status"
 	
 		column <- 14
@@ -54,7 +74,7 @@ for(c in (1:nrow(big_camp_dict))){
 		
 		
 		
-		# dates -----------------------------------------------------------------------------------------------------------
+		# dates 
 		path.cal <- ".calendar"
 		
 		html_cal <- html_nodes(webpage, path.cal)
@@ -69,11 +89,15 @@ for(c in (1:nrow(big_camp_dict))){
 		
 		names(df) <- dates_vector
 		
-		# camp name -------------------------------------------------------------------------------------------------------
+
+
+		# camp name 
 		
 		camp_name <- rep.int(camp_dict[c,1], 1)
 	
-		# site id ---------------------------------------------------------------------------------------------------------
+
+
+		# site id 
 		camp_id <- (as.numeric(numbers)+1):(as.numeric(numbers)+25)
 		df <- cbind(camp_name, camp_id, df)
 	
@@ -85,18 +109,20 @@ for(c in (1:nrow(big_camp_dict))){
 	}
 }
 
-str(all_sites)
-
 tidy_sites <- all_sites %>%
 	select(camp_name, camp_id, W_27, Th_28, F_29, Sa_30) %>%
 	gather(value = availability, W_27, Th_28, F_29, Sa_30) %>%
 	rename(day = W_27)
 
 
+
 # run the code below to check how many sites haven't been released yet
-	# these are camp sites at campgrounds that havne't been released because of the Merced
+	# these are unreleased camp sites at open campgrounds 
+	# havn't been released because of the Merced water flow and snowmelt
 tidy_sites %>%
 	filter(availability == "X") 
+
+
 
 # check what sites are currently avaiable in any of the campgrounds
 tidy_sites %>%
