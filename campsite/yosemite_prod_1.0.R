@@ -1,7 +1,8 @@
 # libraries -----------------------------------------------------------------------------------------------------------
+
+
 library("rvest")
 library("tidyverse")
-
 all_sites <- as.data.frame(NULL)
 numbers <- "0"
 
@@ -91,5 +92,12 @@ tidy_sites <- all_sites %>%
 	gather(value = availability, W_27, Th_28, F_29, Sa_30) %>%
 	rename(day = W_27)
 
+
+# run the code below to check how many sites haven't been released yet
+	# these are camp sites at campgrounds that havne't been released because of the Merced
+tidy_sites %>%
+	filter(availability == "X") 
+
+# check what sites are currently avaiable in any of the campgrounds
 tidy_sites %>%
 	filter(availability == "A") 
