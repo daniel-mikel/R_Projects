@@ -1,5 +1,6 @@
 # Instructions:
-	# run the entirety of the script to scrape data from the NPS website
+	# run the entirety of the script on your desktop to scrape data from the NPS website
+		# make sure you have all of the required packages!
 	# afterword you can run the code chuncks under the last two comments to check:
 		# how many sites are unavailable for open campgrounds
 		# how many sites are available for open campgrounds
