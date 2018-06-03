@@ -22,10 +22,11 @@ library("tidyverse")
 all_sites <- as.data.frame(NULL)
 numbers <- "0"
 
-camp <- c("upper_pines", "lower_pines", "north_pines")
+camp <- c("upper_pines", "lower_pines", "north_pines", "tuoloumne_meadows")
 url <- c("https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70925&calarvdate=06/26/2018&sitepage=true&startIdx=",
 		 "https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70928&calarvdate=06/26/2018&sitepage=true&startIdx=",
-		 "https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70927&calarvdate=06/26/2018&sitepage=true&startIdx=")
+		 "https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70927&calarvdate=06/26/2018&sitepage=true&startIdx=",
+		 "https://www.recreation.gov/campsiteCalendar.do?page=calendar&contractCode=NRSO&parkId=70926&calarvdate=06/26/2018&sitepage=true&startIdx=")
 camp_dict <- as.data.frame(cbind(camp, url))
 
 num_site <- as.vector(NULL)
@@ -100,8 +101,9 @@ for(c in (1:nrow(big_camp_dict))){
 
 		# site id 
 		camp_id <- (as.numeric(numbers)+1):(as.numeric(numbers)+25)
-		df <- cbind(camp_name, camp_id, df)
-	
+		df <- cbind(camp_name, camp_id[1:nrow(df)], df)
+		
+
 		# combine df
 		all_sites <- rbind(all_sites, df)
 	
@@ -109,6 +111,8 @@ for(c in (1:nrow(big_camp_dict))){
 	
 	}
 }
+
+colnames(all_sites)[2] <- "camp_id"
 
 tidy_sites <- all_sites %>%
 	select(camp_name, camp_id, W_27, Th_28, F_29, Sa_30) %>%
